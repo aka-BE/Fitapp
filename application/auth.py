@@ -30,8 +30,8 @@ def signup():
 
     form = SignupForm()
     if form.validate_on_submit():
-        existing_user = User.query.filter_by(email=form.email.data).first()
-        if existing_user is None:
+        existing_user = User.query.filter_by(email=form.email.data).first() # Check for user in DB
+        if existing_user is None: 
             user = User(
                 fullname=form.fullname.data,
                 username=form.username.data,
@@ -42,6 +42,7 @@ def signup():
             db.session.add(user)
             db.session.commit()  # Create new user
             login_user(user)  # Log in as newly created user
+            session['user'] = form.email.data
             return redirect(url_for("home_bp.home"))
         flash("A user already exists with that email address.")
     return render_template(
@@ -71,6 +72,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(password=form.password.data):
             login_user(user)
+            session['user'] = form.email.data
             next_page = request.args.get('next')
             return redirect(next_page or url_for('home_bp.home'))
         flash('Invalid username/password combination')

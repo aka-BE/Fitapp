@@ -29,7 +29,7 @@ class User(UserMixin, db.Model):
     )
     phone = db.Column(
         db.String(40),
-        unique=True,
+        unique=False,
         nullable=False
     )
     password = db.Column(
