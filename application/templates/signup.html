@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+   
+    <link rel="stylesheet" href="{{ url_for('static',filename='/styles/signup.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+
+  {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert">
+          x
+        </button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+  <div class="container">
+    <div class="title">Sign Up</div>
+    <div class="content">
+      <form method="POST" action="{{ url_for('auth_bp.signup') }}">
+        {{ form.csrf_token }}
+        
+        <div class="user-details">
+          <div class="input-box">
+            {{ form.fullname.label }}
+            {{ form.fullname(placeholder='John Smith') }}
+            {% if form.fullname.errors %}
+              <ul class="errors">
+                {% for error in form.fullname.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="input-box">
+            {{ form.username.label }}
+            {{ form.username(placeholder='Your username') }}
+            {% if form.username.errors %}
+              <ul class="errors">
+                {% for error in form.username.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="input-box">
+            {{ form.email.label }}
+            {{ form.email(placeholder='youremail@example.com') }}
+            {% if form.email.errors %}
+              <ul class="errors">
+                {% for error in form.email.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="input-box">
+            {{ form.phone.label }}
+            {{ form.phone(placeholder='Enter mobile number') }}
+            {% if form.phone.errors %}
+              <ul class="errors">
+                {% for error in form.phone.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="input-box">
+            {{ form.password.label }}
+            {{ form.password }}
+            {% if form.password.errors %}
+              <ul class="errors">
+                {% for error in form.password.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="input-box">
+            {{ form.confirm.label }}
+            {{ form.confirm }}
+            {% if form.confirm.errors %}
+              <ul class="errors">
+                {% for error in form.confirm.errors %}
+                  <li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="button">
+          {{ form.submit }}
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

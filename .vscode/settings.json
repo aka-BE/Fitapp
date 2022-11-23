@@ -1,0 +1,10 @@
+{
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_flask_sqlalchemy",
+        "pylint_flask",
+        "--disable=W0107",
+        "--disable=C0415",
+        "--disable=C0209"
+    ]
+}
