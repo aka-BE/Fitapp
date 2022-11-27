@@ -1,7 +1,7 @@
-"""Flask app configuration."""
+"""Flask app configuration."""  
 from os import environ, path
 from dotenv import load_dotenv
-import redis
+#import redis
 
 
 basedir = path.abspath(path.dirname(__file__))
@@ -25,5 +25,5 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Flask-Session
-    SESSION_TYPE = "redis"
-    SESSION_REDIS = redis.from_url(environ.get('SESSION_REDIS'))
+    # SESSION_TYPE = "redis"
+    # SESSION_REDIS = redis.from_url(environ.get('SESSION_REDIS'))
