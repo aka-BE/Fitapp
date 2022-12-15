@@ -64,3 +64,36 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+
+class Feedback(db.Model):
+    """Feedback model."""
+
+    __tablename__ = 'feedback'
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+    fullname = db.Column(
+        db.String(100),
+        nullable=False,
+        unique=False
+    )
+    email = db.Column(
+        db.String(40),
+        unique=False,
+        nullable=False
+    )
+    phone = db.Column(
+        db.String(40),
+        unique=False,
+        nullable=False
+    )
+    body = db.Column(
+        db.String(40),
+        unique=False,
+        nullable=False
+    )
+
+    def __repr__(self):
+        return '<Feedback {}>'.format(self.fullname)

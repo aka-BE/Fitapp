@@ -1,6 +1,9 @@
 """Logged-in page routes."""
-from flask import Blueprint, render_template, redirect, url_for, session
+from flask import Blueprint, render_template, redirect, url_for, session, flash
 from flask_login import login_required, logout_user
+
+from .forms import FeedbackForm
+from .models import Feedback, db
 
 
 # Blueprint Configuration
@@ -13,22 +16,34 @@ home_bp = Blueprint(
 
 @home_bp.route('/', methods=['GET', 'POST'])
 def home():
-    """Home"""
+    """
+    User feedback.
 
-    return render_template('home.html')
+    GET requests serve home page.
+    POST requests validate form & receive feedback.
+    """
 
-
-@home_bp.route('/feedback', methods=['GET', 'POST'])
-@login_required
-def feedback():
-    """Feedback"""
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        feedback = Feedback(
+            fullname=form.fullname.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            body=form.body.data
+        )
+        db.session.add(feedback)
+        db.session.commit()
+        flash("Feedback received!")
+    else:
+        flash("Error submiting form")
     
     return render_template(
-        'feedback.html',
-        tile='User Feedback',
-        template='feedback-template',
-        body="You are now logged in!"
-        )
+        'home.html',
+        form=form,
+        title="Home page.",
+        template="home-page",
+        body="Home page."
+    )
 
 
 @home_bp.route("/logout")
