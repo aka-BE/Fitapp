@@ -46,7 +46,24 @@ def home():
     )
 
 
-@home_bp.route("/logout")
+@home_bp.route('/calculator', methods=['GET', 'POST'])
+def calculator():
+    """
+    Calculator page.
+
+    GET requests serve calculator page.
+    POST requests receive user calories goal.
+    """
+
+    return render_template(
+        'calculator.html',
+        title="Calculator page.",
+        template="calculator-page",
+        body="Calculator page."
+    )    
+
+
+@home_bp.route('/logout')
 @login_required
 def logout():
     """User logout logic."""
