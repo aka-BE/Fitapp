@@ -52,7 +52,7 @@ def calculator():
     Calculator page.
 
     GET requests serve calculator page.
-    POST requests receive user calories goal.
+    POST requests receive user calories goal. (# Not implamented yet)
     """
 
     return render_template(
@@ -61,6 +61,23 @@ def calculator():
         template="calculator-page",
         body="Calculator page."
     )    
+
+
+@home_bp.route('/calendar', methods=['GET', 'POST'])
+def calendar():
+    """
+    Calendar page.
+
+    GET requests serve calendar page.
+    POST requests receive user calories input. (# Not implamented yet)
+    """
+
+    return render_template(
+        'calendar.html',
+        title="Calendar page.",
+        template="calendar-page",
+        body="Calendar page."
+    ) 
 
 
 @home_bp.route('/logout')
