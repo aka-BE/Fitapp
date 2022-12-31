@@ -42,7 +42,3 @@ class SearchForm(FlaskForm):
     gr = IntegerField('Gr', validators=[DataRequired(), NumberRange(min=0)])
     submit = SubmitField('დამატება')
 
-
-class LogForm(FlaskForm):
-    date = DateField('Date', validators=[DataRequired()])
-    submit = SubmitField('დამატება')

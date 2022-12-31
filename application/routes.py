@@ -1,9 +1,10 @@
 """Logged-in page routes."""
 from flask import Blueprint, render_template, redirect, url_for, session, flash, jsonify, request
 from flask_login import login_required, logout_user
+from datetime import datetime
 
 
-from .forms import FeedbackForm, SearchForm, LogForm
+from .forms import FeedbackForm, SearchForm
 from .models import Feedback, Log, Food, db
 
 
@@ -75,7 +76,6 @@ def calendar():
 
     return render_template(
         'calendar.html',
-        form=form,
         title="Calendar page.",
         template="calendar-page",
         body="Calendar page."
@@ -90,12 +90,14 @@ def create_log():
     POST request add date to calendar page.
     """
 
-    form = LogForm()
-    if form.validate_on_submit():
-        date = form.date.data
-        print(date)
+    date = request.form.get('date')
 
-    return redirect(url_for(view))
+    log = Log(date=datetime.strptime(date, '%Y-%m-%d'))
+
+    db.session.add(log)
+    db.session.commit()
+
+    return redirect(url_for('home_bp.view'))
 
 
 

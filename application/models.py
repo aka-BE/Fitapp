@@ -55,18 +55,7 @@ class Log(db.Model):
 
     __tablename__ = 'log'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    food_id = db.Column(db.Integer, db.ForeignKey('food.id'))
     date = db.Column(db.DateTime, index=False, unique=False, nullable=False)
-    gr = db.Column(db.Float,unique=False,nullable=False)
-
-    # Relationship
-    user = relationship('User')
-    food = relationship('Food')
-
-    @property
-    def total(self):
-        return self.food.id.cal * self.gr
 
     def __repr__(self):
         return '<Calendar {}>'.format(self.email)
