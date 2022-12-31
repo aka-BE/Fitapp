@@ -1,9 +1,10 @@
 """Logged-in page routes."""
-from flask import Blueprint, render_template, redirect, url_for, session, flash
+from flask import Blueprint, render_template, redirect, url_for, session, flash, jsonify, request
 from flask_login import login_required, logout_user
 
-from .forms import FeedbackForm
-from .models import Feedback, db
+
+from .forms import FeedbackForm, SearchForm, LogForm
+from .models import Feedback, Log, Food, db
 
 
 # Blueprint Configuration
@@ -69,15 +70,66 @@ def calendar():
     Calendar page.
 
     GET requests serve calendar page.
-    POST requests receive user calories input. (# Not implamented yet)
+    POST requests receive user calories input.
     """
 
     return render_template(
         'calendar.html',
+        form=form,
         title="Calendar page.",
         template="calendar-page",
         body="Calendar page."
+    )
+
+
+@home_bp.route('/create_log', methods=['POST'])
+def create_log():
+    """
+    Create log.
+
+    POST request add date to calendar page.
+    """
+
+    form = LogForm()
+    if form.validate_on_submit():
+        date = form.date.data
+        print(date)
+
+    return redirect(url_for(view))
+
+
+
+@home_bp.route('/view', methods=['GET', 'POST'])
+def view():
+    """
+    Calendar view page.
+
+    GET requests serve calendar view page.
+    POST requests receive user calories input.
+    """
+
+    form = SearchForm()
+
+    return render_template(
+        'view.html',
+        form=form,
+        title="View page.",
+        template="View-page",
+        body="View page."
     ) 
+
+@home_bp.route('/food', methods=['GET'])
+def fooddic():
+    """
+    Food search view page.
+
+    GET request search suggestions.
+    """
+
+    res = Food.query.all()
+    list_food = [r.as_dict() for r in res]   
+    
+    return jsonify(list_food)
 
 
 @home_bp.route('/logout')

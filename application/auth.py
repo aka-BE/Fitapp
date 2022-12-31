@@ -42,7 +42,7 @@ def signup():
             db.session.add(user)
             db.session.commit()  # Create new user
             login_user(user)  # Log in as newly created user
-            #session['user'] = form.email.data
+            session['user'] = form.email.data
             return redirect(url_for("home_bp.home"))
         flash("A user already exists with that email address.")
     return render_template(
@@ -55,7 +55,7 @@ def signup():
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
-def login():
+def login():    
     """
     Log-in page for registered users.
 
@@ -64,7 +64,7 @@ def login():
     """
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return redirect(url_for('home_bp.home'))
+        return redirect(url_for('home_bp.calendar'))
 
     form = LoginForm()
     # Validate login attempt
@@ -72,9 +72,9 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(password=form.password.data):
             login_user(user)
-            #session['user'] = form.email.data
+            session['user'] = form.email.data
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('home_bp.home'))
+            return redirect(next_page or url_for('home_bp.calendar'))
         flash('Invalid username/password combination')
         return redirect(url_for('auth_bp.login'))
     return render_template(

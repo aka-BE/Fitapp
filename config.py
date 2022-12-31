@@ -25,5 +25,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Flask-Session
-    # SESSION_TYPE = "redis"
-    # SESSION_REDIS = redis.from_url(environ.get('SESSION_REDIS'))
+    SESSION_TYPE = "filesystem"
