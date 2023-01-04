@@ -37,9 +37,7 @@
                 {% endif %}
             </div>
             <div class="forgot-pass"><a href="#">დაგავიწყდათ პაროლი?</a></div>
-            <div class="btn">
-                {{ form.submit }}
-            </div>
+            {{ form.submit(class="btn btn-primary") }}
             <div class="signup-llink">არ ხართ ჩვენი წევრი? <a href="{{ url_for('auth_bp.signup') }}">დარეგისტრიდით აქ</a></div>
         </form>
     </div>

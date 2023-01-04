@@ -42,8 +42,7 @@ def signup():
             db.session.add(user)
             db.session.commit()  # Create new user
             login_user(user)  # Log in as newly created user
-            session['user'] = form.email.data
-            return redirect(url_for("home_bp.home"))
+            return redirect(url_for("home_bp.calendar"))
         flash("A user already exists with that email address.")
     return render_template(
         'signup.html',
@@ -72,7 +71,6 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(password=form.password.data):
             login_user(user)
-            session['user'] = form.email.data
             next_page = request.args.get('next')
             return redirect(next_page or url_for('home_bp.calendar'))
         flash('Invalid username/password combination')

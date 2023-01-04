@@ -32,6 +32,15 @@
 					<h1>
 						<a href="{{ url_for('home_bp.home') }}">FITAPP</a>
 					</h1>
+					<div class="row t20">
+						<div class="col-lg-4 col-lg-offset-4">
+							<ul class="nav nav-pills nav-justified">
+							  <li role="presentation">
+							  	<a href="{{ url_for('home_bp.calendar') }}" title="Calendar">კალენდარი</a>
+							  </li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -39,7 +48,7 @@
 				<div class="col-lg-4 col-lg-offset-4">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<form action="{{ url_for('home_bp.view') }}" method="POST" role="form">
+							<form action="{{ url_for('home_bp.add_food_to_log', log_id=log.id) }}" method="POST" role="form">
 							
 									<label>აღრიცხე პროდუქტი/კერძი</label>
 									<div class="row">
@@ -72,28 +81,13 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<h3 class="lean-h text-black">
-								<i class="glyphicon glyphicon-calendar"></i>#
-							</h3>
+								<i class="glyphicon glyphicon-calendar"></i> {{ log.date.strftime('%b %d, %Y') }}
+							</h3>	
 
 							<div class="row">
 								<div class="col-lg-3">
 									<h4 class="lean-h">
-										Protein: &nbsp;<strong class="f25">#</strong>
-									</h4>
-								</div>
-								<div class="col-lg-3">
-									<h4 class="lean-h">
-										Carbohydrates: <strong class="f25">#</strong>
-									</h4>
-								</div>
-								<div class="col-lg-3">
-									<h4 class="lean-h">
-										Fat: <strong class="f25">#</strong>
-									</h4>
-								</div>
-								<div class="col-lg-3">
-									<h4 class="lean-h">
-										Calories: <strong class="f25">#</strong>
+										კალორიების ჯამი: <strong class="f25">{{ total['cal'] }}</strong>
 									</h4>
 								</div>
 							</div>
@@ -103,15 +97,29 @@
 								<thead>
 									<tr>
 										<th style="width: 5%;">#</th>
-										<th>Name</th>
-										<th style="width: 10%;">Protein</th>
-										<th style="width: 16%;">Carbohydrates</th>
-										<th style="width: 10%;">Fat</th>
-										<th style="width: 12%;">Calories</th>
-										<th style="width: 20%;">Actions</th>
+										<th>დასახელება</th>
+										<th style="width: 10%;">გრამი</th>
+										<th style="width: 12%;">კალორია</th>
+										<th style="width: 20%;"></th>
 									</tr>
 								</thead>
 								
+								<tbody>
+									{% for log_food in log.prods %}
+									<tr>
+										<td>{{ loop.index }}</td>
+										<td>{{ log_food.name }}</td>
+										<td>{{ log_food.gr }}</td>
+										<td>{{ log_food.cal }}</td>
+										<td>
+											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-danger btn-xs">
+												<i class="glyphicon glyphicon-trash"></i> წაშლა
+											</a> 
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+
 							</table>
 						</div>
 					</div>
@@ -154,17 +162,18 @@
                 $('form').on('submit', function(e){
                     $.ajax({
                     data: {
-                        country:$('#country').val()
+                        food:$('#food').val(),
+						gr: $('#gr').val()
                     },
                     type: 'POST',
-                    url : '/process'
+                    url : '/add_food_to_log' + log_id
                     })
                     .done(function(data){ 
                         if (data.error){
                             $('#result').text(data.error).show();
                         }
                         else {
-                            $('#result').html(data.country).show()
+                            $('#result').html(data.food).show()
                         }
                     })
                     e.preventDefault();
