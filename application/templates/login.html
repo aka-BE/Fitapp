@@ -40,6 +40,9 @@
             {{ form.submit(class="btn btn-primary") }}
             <div class="signup-llink">არ ხართ ჩვენი წევრი? <a href="{{ url_for('auth_bp.signup') }}">დარეგისტრიდით აქ</a></div>
         </form>
+        {% for mesg in get_flashed_messages() %}
+            <h3>{{ mesg }}</h3>
+        {% endfor %}
     </div>
 </div>
     

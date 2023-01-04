@@ -73,7 +73,7 @@ def login():
             login_user(user)
             next_page = request.args.get('next')
             return redirect(next_page or url_for('home_bp.calendar'))
-        flash('Invalid username/password combination')
+        flash('მეილი ან პაროლი არ არის სწორი')
         return redirect(url_for('auth_bp.login'))
     return render_template(
         'login.html',
@@ -95,5 +95,5 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     """Redirect unauthorized users to Login page."""
-    flash('You must be logged in to view that page.')
+    flash('გაიარეთ ავტორიზაცია რომ იხილოთ გვერდი.')
     return redirect(url_for('auth_bp.login'))
