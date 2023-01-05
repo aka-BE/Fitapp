@@ -43,7 +43,7 @@ def signup():
             db.session.commit()  # Create new user
             login_user(user)  # Log in as newly created user
             return redirect(url_for("home_bp.calendar"))
-        flash("A user already exists with that email address.")
+        flash("მომხმარებელი ამ მეილით უკვე არსებობს.")
     return render_template(
         'signup.html',
         form=form,

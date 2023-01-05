@@ -14,16 +14,16 @@ class SignupForm(FlaskForm):
     """User Sign-up Form."""
     fullname = StringField('Fullname',validators=[DataRequired()])
     username = StringField('Username',validators=[DataRequired()])
-    email = StringField('Email', validators=[Length(min=10), Email(message='Enter a valid email.'), DataRequired()])
-    phone = StringField('Phone', validators=[DataRequired(), Length(min=9, message='Use valid number')])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6, message='Select a stronger password.')])
-    confirm = PasswordField('Confirm Your Password', validators=[DataRequired(), EqualTo('password', message='Passwords must match.')])
+    email = StringField('Email', validators=[DataRequired(), Length(min=10), Email(message='შიყვანეთ მეილი.')])
+    phone = StringField('Phone', validators=[DataRequired(), Length(min=9, message='შეიყვანეთ ნომერი.')])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6, message='შეიყვანეთ ძლიერი პაროლი.')])
+    confirm = PasswordField('Confirm Your Password', validators=[DataRequired(), EqualTo('password', message='პაროლი არ ემთხვევა.')])
     submit = SubmitField('რეგისტრაცია')
 
 
 class LoginForm(FlaskForm):
     """User Log-in Form."""
-    email = StringField('Email', validators=[DataRequired(), Email(message='Enter a valid email.')])
+    email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('შესვლა')
 
@@ -31,9 +31,9 @@ class LoginForm(FlaskForm):
 class FeedbackForm(FlaskForm):
     """Feedback Form."""
     fullname = StringField('Fullname', validators=[DataRequired()])
-    email = StringField('Email', validators=[Length(min=10), Email(message='Enter a valid email.'), DataRequired()])
-    phone = StringField('Phone', validators=[DataRequired(), Length(min=9, message='Use valid number')])
-    body = StringField('Message', validators=[DataRequired(),Length(min=4, message='Your message is too short')])
+    email = StringField('Email', validators=[Length(min=10), Email(message='შიყვანეთ სწორი მეილი.'), DataRequired()])
+    phone = StringField('Phone', validators=[DataRequired(), Length(min=9, message='შეიყვანეთ ნომერი.')])
+    body = StringField('Message', validators=[DataRequired(),Length(min=4, message='შეტყობინება ძალიან მოკლეა')])
     submit = SubmitField('Submit')
 
 

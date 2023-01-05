@@ -1,5 +1,5 @@
 """Logged-in page routes."""
-from flask import Blueprint, render_template, redirect, url_for, session, flash, jsonify, request
+from flask import Blueprint, render_template, redirect, url_for, session, flash, jsonify, request, escape
 from flask_login import login_required, logout_user, current_user
 from datetime import datetime
 
@@ -65,17 +65,17 @@ def calculator():
     )    
 
 
-@home_bp.route('/calendar', methods=['GET', 'POST'])
+@home_bp.route('/calendar', methods=['GET'])
 @login_required
 def calendar():
     """
     Calendar page.
 
     GET requests serve calendar page.
-    POST requests receive user calories input.
     """
 
-    logs = Log.query.order_by(Log.date.desc()).all()
+    user = current_user
+    logs = Log.query.filter_by(user=user).order_by(Log.date.desc()).all()
 
     log_dates = []
 
@@ -129,7 +129,7 @@ def view(log_id):
     GET requests serve calendar view page.
     POST requests receive user calories input.
     """
-
+    
     log = Log.query.get_or_404(log_id)
 
     form = SearchForm()
