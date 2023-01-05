@@ -111,6 +111,10 @@ def create_log():
     user = current_user
     date = request.form.get('date')
 
+    if not date:
+        flash('აირჩიეთ თარიღი', 'error')
+        return redirect(url_for('home_bp.calendar'))
+
     log = Log(date=datetime.strptime(date, '%Y-%m-%d'), user=user)
 
     db.session.add(log)

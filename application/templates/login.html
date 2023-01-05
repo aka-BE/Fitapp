@@ -41,7 +41,7 @@
             {{ form.submit(class="btn btn-primary") }}
             <div class="signup-llink">არ ხართ ჩვენი წევრი? <a href="{{ url_for('auth_bp.signup') }}">დარეგისტრიდით აქ</a></div>
         </form>
-        {% for message in get_flashed_messages() %}
+        {% for message in get_flashed_messages(category_filter=["error"]) %}
             <div class="alert alert-warning">
                 <button
                     type="button"

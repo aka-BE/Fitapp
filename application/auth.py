@@ -43,7 +43,7 @@ def signup():
             db.session.commit()  # Create new user
             login_user(user)  # Log in as newly created user
             return redirect(url_for("home_bp.calendar"))
-        flash("მომხმარებელი ამ მეილით უკვე არსებობს.")
+        flash("მომხმარებელი ამ მეილით უკვე არსებობს.", "error")
     return render_template(
         'signup.html',
         form=form,
@@ -73,7 +73,7 @@ def login():
             login_user(user)
             next_page = request.args.get('next')
             return redirect(next_page or url_for('home_bp.calendar'))
-        flash('მეილი ან პაროლი არ არის სწორი')
+        flash('მეილი ან პაროლი არ არის სწორი', 'error')
         return redirect(url_for('auth_bp.login'))
     return render_template(
         'login.html',
@@ -95,5 +95,5 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
     """Redirect unauthorized users to Login page."""
-    flash('გაიარეთ ავტორიზაცია რომ იხილოთ გვერდი.')
+    flash('გაიარეთ ავტორიზაცია რომ იხილოთ გვერდი.', 'error')
     return redirect(url_for('auth_bp.login'))
