@@ -65,7 +65,7 @@
     
                                         <div class="col-lg-4">
                                             <div class="form-group">
-                                                {{ form.submit(type="submit", class="btn btn-primary btn-block") }}
+                                                {{ form.submit(type="submit", class="btn btn-success btn-block") }}
                                             </div>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@
 										<td>{{ log_food.gr }}</td>
 										<td>{{ log_food.cal }}</td>
 										<td>
-											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-danger btn-xs">
+											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-success btn-xs">
 												<i class="glyphicon glyphicon-trash"></i> წაშლა
 											</a> 
 										</td>

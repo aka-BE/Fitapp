@@ -22,7 +22,7 @@ body {
 	background: rgba(44, 62, 80, .8);
 }
 #homeJumbo h1 {
-	font-size: 30px;
+	font-size: 70px;
 	color: white;
 	font-family: 'Oswald';
 	text-align: center;
@@ -80,3 +80,4 @@ footer {
 	color: black;
 	margin-bottom: 20px;
 }
+

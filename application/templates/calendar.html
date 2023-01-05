@@ -43,9 +43,9 @@
 									<label> ახალი თარიღის დამატება</label>
 									<div class="input-group">
 									  <input type="date" class="form-control" name="date" placeholder="Select New Date" aria-label="date" aria-describedby="add-btn">
-									  <span class="input-group-btn">
-										<button type="submit" class="btn btn-primary" id="add-btn">
-										  <i class="glyphicon glyphicon-plus-sign"></i> დამატება
+									  <span class="input-group-btn" >
+										<button type="submit" class="btn btn-success" id="add-btn">
+										 <i class="glyphicon glyphicon-plus-sign"></i> დამატება
 										</button>
 									  </span>
 									</div>
@@ -71,8 +71,8 @@
 						<div class="panel-body text-bold">
 							<i class="glyphicon glyphicon-calendar"></i> {{ log_date['log_date'].date.strftime('%b %d, %Y') }}
 
-							<a class="btn btn-primary btn-xs pull-right" href="{{ url_for('home_bp.view', log_id=log_date['log_date'].id) }}">
-								View <i class="glyphicon glyphicon-arrow-right"></i>
+							<a class="btn btn-success btn-xs pull-right" href="{{ url_for('home_bp.view', log_id=log_date['log_date'].id) }}">
+								ნახვა <i class="glyphicon glyphicon-arrow-right"></i>
 							</a>
 						</div>
 						<ul class="list-group">
