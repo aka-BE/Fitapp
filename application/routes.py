@@ -1,5 +1,5 @@
 """Logged-in page routes."""
-from flask import Blueprint, render_template, redirect, url_for, session, flash, jsonify, request, escape
+from flask import Blueprint, render_template, redirect, url_for, session, flash, jsonify, request
 from flask_login import login_required, logout_user, current_user
 from datetime import datetime
 

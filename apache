@@ -11,7 +11,7 @@ IfModule mod_ssl.c>
     <Directory /var/www/fitapp>
         WSGIProcessGroup fitapp
         WSGIApplicationGroup %{GLOBAL}
-        Require all granted
+        Require all granted:
     </Directory>
 
 ErrorLog ${APACHE_LOG_DIR}/error.log
