@@ -74,7 +74,7 @@ def calendar():
     """
 
     user = current_user
-    logs = Log.query.filter_by(user=user).order_by(Log.date.desc()).all()
+    logs = Log.query.filter_by(usr=user).order_by(Log.date.desc()).all()
 
     log_dates = []
 
@@ -114,13 +114,12 @@ def create_log():
         flash('აირჩიეთ თარიღი', 'error')
         return redirect(url_for('home_bp.calendar'))
 
-    log = Log(date=datetime.strptime(date, '%Y-%m-%d'), user=user)
+    log = Log(date=datetime.strptime(date, '%Y-%m-%d'), usr=user)
 
     db.session.add(log)
     db.session.commit()
 
     return redirect(url_for('home_bp.view', log_id=log.id))
-
 
 
 @home_bp.route('/view/<int:log_id>', methods=['GET', 'POST'])
@@ -132,27 +131,31 @@ def view(log_id):
     GET requests serve calendar view page.
     POST requests receive user calories input.
     """
-    
-    log = Log.query.get_or_404(log_id)
 
     form = SearchForm()
+    user = current_user
+    log = Log.query.get_or_404(log_id)
 
-    total = {
-        'cal' : 0
-    }
+    if user.id != log.user_id:
+        return redirect(url_for('home_bp.calendar'))
+    
+    else:
+        total = {
+            'cal' : 0
+        }
 
-    for prod in log.prods:
-        total['cal'] += prod.cal
+        for prod in log.prods:
+            total['cal'] += prod.cal
 
-    return render_template(
-        'view.html',
-        form=form,
-        log=log,
-        total=total,
-        title="View page.",
-        template="View-page",
-        body="View page."
-    )
+        return render_template(
+            'view.html',
+            form=form,
+            log=log,
+            total=total,
+            title="View page.",
+            template="View-page",
+            body="View page."
+        )
 
 
 @home_bp.route('/add_food_to_log/<int:log_id>', methods=['POST'])

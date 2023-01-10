@@ -33,7 +33,7 @@ class Food(db.Model):
 class User(UserMixin, db.Model):
     """User account model."""
 
-    __tablename__ = 'user'
+    __tablename__ = 'usr'
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(100), nullable=False, unique=False)
     username = db.Column(db.String(100), nullable=False, unique=False)
@@ -42,7 +42,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(200), primary_key=False, unique=False, nullable=False)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
-    logs = db.relationship('Log', backref='user')
+    logs = db.relationship('Log', backref='usr')
 
     def set_password(self, password):
         """Create hashed password."""
@@ -62,7 +62,7 @@ class Log(db.Model):
     __tablename__ = 'log'
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, index=False, unique=False, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('usr.id'))
     prods = db.relationship('Prod', secondary=log_food, backref="logs")
 
     def __repr__(self):

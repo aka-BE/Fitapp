@@ -310,7 +310,7 @@ h6 {
   bottom: 15px;
   left: 15px;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: rgb(0, 0, 0);
   overflow-y: auto;
   transition: 0.3s;
 }
@@ -318,8 +318,8 @@ h6 {
 .navbar-mobile a,
 .navbar-mobile a:focus {
   padding: 10px 20px;
-  font-size: 15px;
-  color: #2a2a2a;
+  font-size: 30px;
+  color: #ffffff;
 }
 
 .navbar-mobile a:hover,
