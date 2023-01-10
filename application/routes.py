@@ -35,9 +35,8 @@ def home():
         )
         db.session.add(feedback)
         db.session.commit()
-        flash("Feedback received!")
-    else:
-        flash("Error submiting form")
+        flash("შეტყობინება მიღებულია!")
+        return redirect(url_for("home_bp.home", form=form))
     
     return render_template(
         'home.html',
@@ -45,7 +44,7 @@ def home():
         title="Home page.",
         template="home-page",
         body="Home page."
-    )
+    )   
 
 
 @home_bp.route('/calculator', methods=['GET', 'POST'])

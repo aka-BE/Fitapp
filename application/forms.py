@@ -1,6 +1,6 @@
 """Sign-up & log-in forms."""
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, DateField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import (
     DataRequired,
     Email,
@@ -31,10 +31,10 @@ class LoginForm(FlaskForm):
 class FeedbackForm(FlaskForm):
     """Feedback Form."""
     fullname = StringField('Fullname', validators=[DataRequired()])
-    email = StringField('Email', validators=[Length(min=10), Email(message='შიყვანეთ სწორი მეილი.'), DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Length(min=10), Email(message='შიყვანეთ სწორი მეილი.')])
     phone = StringField('Phone', validators=[DataRequired(), Length(min=9, message='შეიყვანეთ ნომერი.')])
     body = StringField('Message', validators=[DataRequired(),Length(min=4, message='შეტყობინება ძალიან მოკლეა')])
-    submit = SubmitField('Submit')
+    submit = SubmitField('გაგზავნა')
 
 
 class SearchForm(FlaskForm):

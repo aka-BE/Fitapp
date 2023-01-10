@@ -86,7 +86,7 @@ class Feedback(db.Model):
 
     __tablename__ = 'feedback'
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(100), nullable=False, unique=False)
+    fullname = db.Column(db.String(40), unique=False, nullable=False)
     email = db.Column(db.String(40), unique=False, nullable=False)
     phone = db.Column(db.String(40), unique=False, nullable=False)
     body = db.Column(db.String(40), unique=False, nullable=False)

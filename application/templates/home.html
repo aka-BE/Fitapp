@@ -46,7 +46,14 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
+      {% for message in get_flashed_messages() %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+      {% endfor %}
+
       <nav id="navbar" class="navbar">
+
         <ul>
           <li><a class="nav-link scrollto " href="{{ url_for('auth_bp.login') }}">ავტორიზაცია</a></li>
           <li><a class="nav-link scrollto" href="{{ url_for('home_bp.calculator') }}">კალორიების კალკულატორი</a></li>
@@ -73,7 +80,7 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Fitapp შეიქმნა შენი ჯანმრთელობისთვის ❤️</h2>
-                <p class="animate__animated animate__fadeInUp">კალორიული დეფიციტი არის ყველაზე ეფექტური დიეტა წონის დასაკლებად !</p>
+                <p class="animate__animated animate__fadeInUp">კალორიული დეფიციტი არის ყველაზე ეფექტური დიეტა წონის დასაკლებად</p>
               </div>
             </div>
           </div>
@@ -120,7 +127,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>უკუკავშირი</h2>
+          <h2>კონტაქტი</h2>
           <p></p>
         </div>
 
@@ -153,27 +160,50 @@
         </div>
 
         <div class="form">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <form action="{{ url_for('home_bp.home') }}" method="POST">
             <div class="row">
+              {{ form.csrf_token }}
               <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="სახელი" placeholder="თქვენი სახელი" data-rule="minlen:4" data-msg="გთხოვთ, შეიყვანოთ მინიმუმ 4 სიმბოლო">
+                {{ form.fullname(placeholder='სახელი გვარი', class='form-control') }}
+                {% if form.fullname.errors %}
+                <ul class="errors">
+                    {% for error in form.fullname.errors %}
+                    <li>{{ error }}</li>{% endfor %}
+                </ul>
+                {% endif %}
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="ელფოსტა" id="ელფოსტა" placeholder="ელფოსტა" data-rule="ელფოსტა" data-msg="გთხოვთ, შეიყვანოთ სწორი ელფოსტა">
+                {{ form.email(placeholder='ელფოსტა', class='form-control') }}
+                {% if form.email.errors %}
+                <ul class="errors">
+                    {% for error in form.email.errors %}
+                    <li>{{ error }}</li>{% endfor %}
+                </ul>
+                {% endif %}
               </div>
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="ტელეფონის ნომერი" id="ტელეფონის ნომერი" placeholder="ტელეფონის ნომერი" required>
+              {{ form.phone(placeholder='ტელეფონი', class='form-control') }}
+              {% if form.phone.errors %}
+                <ul class="errors">
+                    {% for error in form.phone.errors %}
+                    <li>{{ error }}</li>{% endfor %}
+                </ul>
+              {% endif %}
             </div>
             <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="შეტყობინება" required></textarea>
+              {{ form.body(placeholder='შეტყობინება', class='form-control') }}
+              {% if form.body.errors %}
+                <ul class="errors">
+                    {% for error in form.body.errors %}
+                    <li>{{ error }}</li>{% endfor %}
+                </ul>
+                {% endif %}
             </div>
-            <div class="my-3">
-              <div class="loading">Ჩატვირთვა</div>
-              <div class="error-message"></div>
-              <div class="sent-message">თქვენი შეტყობინება გაიგზავნა გმადლობთ!</div>
+            <div class="my-3"></div>
+            <div class="text-center">
+              {{ form.submit(class="btn btn-success btn-lg") }}
             </div>
-            <div class="text-center"><button type="submit">გაგზავნეთ შეტყობინება</button></div>
           </form>
         </div>
 
@@ -245,14 +275,14 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Groovin</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Fitapp</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a href="https://github.com/aka-BE/">aka-BE</a>
       </div>
     </div>
   </footer><!-- End Footer -->
