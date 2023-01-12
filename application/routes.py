@@ -35,7 +35,7 @@ def home():
         )
         db.session.add(feedback)
         db.session.commit()
-        flash("შეტყობინება მიღებულია!")
+        flash("შეტყობინება მიღებულია!", 'error')
         return redirect(url_for("home_bp.home", form=form))
     
     return render_template(
@@ -212,6 +212,22 @@ def fooddic():
     list_food = [r.as_dict() for r in res]   
     
     return jsonify(list_food)
+
+
+@home_bp.route('/terms')
+def terms():
+    """
+    Terms page.
+
+    GET requests serve terms page.
+    """
+
+    return render_template(
+        'terms.html',
+        title="Terms page.",
+        template="terms-page",
+        body="Terms page."
+    )    
 
 
 @home_bp.route('/logout')

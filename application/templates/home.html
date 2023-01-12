@@ -46,7 +46,7 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      {% for message in get_flashed_messages() %}
+      {% for message in get_flashed_messages(category_filter=["error"]) %}
             <div class="alert alert-success">
                 {{ message }}
             </div>
@@ -76,7 +76,7 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url(/static/img/slide1.jpg)">
+          <div class="carousel-item active" style="background-image: url(/static/img/terms.jpg)">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Fitapp შეიქმნა შენი ჯანმრთელობისთვის ❤️</h2>
@@ -219,6 +219,10 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6">
+
+          </div>
+
+          <div class="col-lg-3 col-md-6">
             <div class="footer-info">
               <h3>Fitapp</h3>
               <p>
@@ -238,35 +242,13 @@
             </div>
           </div>
 
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
+            <h4>ინფორმაცია</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url_for('home_bp.home') }}">მთავარი გვერდი</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">სერვისები</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url_for('home_bp.terms') }}">წესები და პირობები</a></li>
             </ul>
-          </div>
-
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
           </div>
 
         </div>
@@ -282,7 +264,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
-        Designed by <a href="https://github.com/aka-BE/">aka-BE</a>
+        Created by <a href="https://github.com/aka-BE/">aka-BE</a>
       </div>
     </div>
   </footer><!-- End Footer -->

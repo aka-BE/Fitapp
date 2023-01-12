@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Fitapp</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static',filename='/img/android-chrome-192x192.png') }}" rel="icon">
+  <link href="{{ url_for('static',filename='/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static',filename='/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static',filename='/css/home.css') }}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Groovin - v4.9.1
+  * Template URL: https://bootstrapmade.com/groovin-free-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="{{ url_for('home_bp.home') }}"><img src="{{ url_for('static',filename='/img/fitapp-low.png') }}" alt=""></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      {% for message in get_flashed_messages(category_filter=["error"]) %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+      {% endfor %}
+
+      <nav id="navbar" class="navbar">
+
+        <ul>
+          <li><a class="nav-link scrollto " href="{{ url_for('auth_bp.login') }}">ავტორიზაცია</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('home_bp.calculator') }}">კალო-კალკულატორი</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('home_bp.calendar', user=user) }}">დღიური</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('home_bp.logout') }}">გამოსვლა</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+
+        <div class="carousel-inner" role="listbox">
+
+          <!-- Slide 1 -->
+          <div class="carousel-item active" style="background-image: url(/static/img/slide1.jpg)">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">წესები და პირობები</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section><!-- End Hero -->
+
+
+  <main id="main">
+    
+
+    <!-- ======= Contact Section ======= -->
+    <section>
+      <div class="container">
+        <div class="section title">
+          <div class="col-xl-7 ps ps-lg-5">
+            <div class="content d-flex flex-column justify-content-center">
+              <h2>ტერმინთა განმარტება</h2>
+              <ul>
+              <p class="blockquote">მიმწოდებელი (ჩვენ) - fitapp.ge</p>
+              <p class="blockquote">მომხმარებელი (თქვენ) - პირი, რომელიც შედის ვებგვერდზე.</p>
+              <p class="blockquote">ხელშეკრულება - წინამდებარე დოკუმენტი.</p>
+              <p class="blockquote">შეთანხმება - მოხმარების წესები და პირობები რომელსაც თქვენ ეთანხმებით საიტზე დარეგისტრირების დროს.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section title">
+          <div class="col-xl-7 ps ps-lg-5">
+            <div class="content d-flex flex-column justify-content-center">
+              <h2>რეგისტრაციის წესები</h2>
+                <ul>
+                  <p class="blockquote">მომხმარებელს შეუძლია გაიაროს რეგისტრაცია ელფოსტის მეშვეობით.</p>
+                  <p class="blockquote">რეგისტრაციის დროს აკრძალულია სხვა პიროვნების მონაცემების მითითება.</p>
+                  <p class="blockquote">რეგისტრაციის გაუქმებისა და მონაცემების წაშლის სურვილის შემთხვევაში მომხმარებელი უნდა დაუკავშირდეს კომპანიას ელექტრონული ფოსტის მისამართზე - fittapp2022@gmail.com და კომპანია გააუქმებს მის ანგარიშს.</p>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section title">
+          <div class="col-xl-7 ps ps-lg-5">
+            <div class="content d-flex flex-column justify-content-center">
+              <h2>როგორ მუშაობს კომპანია</h2>
+                <ul>
+                  <p class="blockquote">მომხმარებელს შეუძლია გაიაროს რეგისტრაცია ელფოსტის მეშვეობით.</p>
+                  <p class="blockquote">რეგისტრაციის დროს აკრძალულია სხვა პიროვნების მონაცემების მითითება.</p>
+                  <p class="blockquote">რეგისტრაციის გაუქმებისა და მონაცემების წაშლის სურვილის შემთხვევაში მომხმარებელი უნდა დაუკავშირდეს კომპანიას ელექტრონული ფოსტის მისამართზე - fittapp2022@gmail.com და კომპანია გააუქმებს მის ანგარიშს.</p>
+                </ul>  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section title">
+          <div class="col-xl-7 ps ps-lg-5">
+            <div class="content d-flex flex-column justify-content-center">
+              <h2>გადახდის პირობები</h2>
+              <ul>
+                <p class="blockquote">Fitapp-ის სერვისის შეძენა შესაძლებელია ონლაინ გადახდის საშუალებით Visa/Mastercard ბარათებით. გადახდის ღილაკზე დაჭერის შემდგომ, ავტომატურად გადამისამართებულ საქართველოს ბანკის გვერდზე საჭიროა შეიყვანოთ თქვენი ბარათის მონაცემები. გადახდა შესაძლებელია ნებისმიერი ბანკის Visa ან Mastercard ბარათით.</p>
+              </ul>  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="section title">
+          <div class="col-xl-7 ps ps-lg-5">
+            <div class="content d-flex flex-column justify-content-center">
+              <h2>კონფიდენციალურობა</h2>
+              <ul>
+                <p class="blockquote">კონფიდენციალურად ითვლება ნებისმიერი ინფორმაცია, რომელიც არ არის საჯაროდ ხელმისაწვდომი და რომელიც Fitapp-სთვის ცნობილი გახდა მომხმარებლის მიერ აპლიკაციით სარგებლობის საფუძველზე.</p>
+                <p class="blockquote">წინამდებარე წესების საფუძველზე Fitapp იღებს ვალდებულებას დაიცვას, არ გაამჟღავნოს მომხმარებლის მიერ მისთვის გადაცემული კონფიდენციალური ინფორმაცია.</p>
+                <p class="blockquote">მომხმარებლის მიერ გაცემული/გამჟღავნებული კონფიდენციალური ინფორმაცია Fitapp-ს მიერ გამოყენებულ იქნება მხოლოდ წინამდებარე წესებისა და მხარეთა შორის არსებული ურთიერთობის ფარგლებში, მხოლოდ ინფორმაციის გამცემის ინტერესების გათვალისწინებითა და მის სასარგებლოდ.</p>
+                <p class="blockquote">კონფიდენციალურობის დარღვევად არ ითვლება თუ ინფორმაციის გამჟღავნება მოთხოვნილია მოქმედი კანონმდებლობის საფუძველზე, შესაბამისად, უფლებამოსილი ორგანოს/დაწესებულების/პირის მიერ; ასეთ შემთხვევაში, Fitapp ვალდებულია უფლებამოსილი ორგანოს/დაწესებულების/პირის მიერ კონფიდენციალური ინფორმაციის გამჟღავნების მოთხოვნის წარდგენიდან დაუყოვნებლივ აცნობოს მომხმარებელს აღნიშნული მოთხოვნისა და Fitapp-ს მხრიდან ინფორმაციის გაცემის  შესახებ.</p>
+              </ul>  
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Fitapp</h3>
+              <p>
+                თბილისი საქართველო <br>
+                
+              
+                <strong>ტელეფონის ნომერი:</strong> 577 000 307<br>
+                <strong>ელფოსტა:</strong> fittapp2022@gmai.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>ინფორმაცია</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url_for('home_bp.home') }}">მთავარი გვერდი</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">სერვისები</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url_for('home_bp.terms') }}">წესები და პირობები</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Fitapp</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/groovin-free-bootstrap-theme/ -->
+        Created by <a href="https://github.com/aka-BE/">aka-BE</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static',filename='/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+  <script src="{{ url_for('static',filename='/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='/vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static',filename='/js/main.js') }}"></script>
+
+</body>
+
+</html>
