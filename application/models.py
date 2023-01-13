@@ -12,6 +12,7 @@ df = pd.read_excel(r'application/excel_database/calo.xlsx') # Import products ca
 engine = create_engine('sqlite:///instance/test.db') # Connect to sql database
 df.to_sql('food', con=engine, if_exists='replace', index=False) # Write data to database with table name 'products'
 
+# Create relationship between two tables
 log_food = db.Table('log_food',
     db.Column('log_id', db.Integer, db.ForeignKey('log.id'), primary_key=True),
     db.Column('prod_id', db.Integer, db.ForeignKey('prod.id'), primary_key=True)

@@ -73,17 +73,17 @@ def calendar():
     GET requests serve calendar page.
     """
 
-    user = current_user
-    logs = Log.query.filter_by(usr=user).order_by(Log.date.desc()).all()
+    user = current_user 
+    logs = Log.query.filter_by(usr=user).order_by(Log.date.desc()).all() # Get logs for current user
 
-    log_dates = []
+    log_dates = [] # Create list
 
-    for log in logs:
-        cal = 0
+    for log in logs: # Loop over every log date
+        cal = 0 # Define total calories as 0
+        for prod in log.prods: # Loop over every product in log
+            cal += prod.cal # Add together calories for looped product per log
 
-        for prod in log.prods:
-            cal += prod.cal
-
+        # Create dictionary and add values of the current log and the total accumulated cal respectively
         log_dates.append({
             'log_date' : log,
             'cal' : cal
@@ -108,13 +108,13 @@ def create_log():
     POST request add date to calendar page.
     """
     user = current_user
-    date = request.form.get('date')
+    date = request.form.get('date') # Get date from user
 
     if not date:
         flash('აირჩიეთ თარიღი', 'error')
         return redirect(url_for('home_bp.calendar'))
 
-    log = Log(date=datetime.strptime(date, '%Y-%m-%d'), usr=user)
+    log = Log(date=datetime.strptime(date, '%Y-%m-%d'), usr=user) # Add date to model
 
     db.session.add(log)
     db.session.commit()
@@ -132,14 +132,17 @@ def view(log_id):
     POST requests receive user calories input.
     """
 
-    form = SearchForm()
+    form = SearchForm() # Form for products search
     user = current_user
     log = Log.query.get_or_404(log_id)
 
+    # Checks if the user trying to access the log is the owner of the log
     if user.id != log.user_id:
         return redirect(url_for('home_bp.calendar'))
     
+    # If the user is the owner of the log
     else:
+        # Get total calories for the log
         total = {
             'cal' : 0
         }
@@ -227,6 +230,22 @@ def terms():
         title="Terms page.",
         template="terms-page",
         body="Terms page."
+    )   
+
+
+@home_bp.route('/services')
+def services():
+    """
+    Services page.
+
+    GET requests serve terms page.
+    """
+
+    return render_template(
+        'services.html',
+        title="Services page.",
+        template="services-page",
+        body="Services page."
     )    
 
 
