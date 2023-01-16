@@ -115,9 +115,7 @@
 										<td>{{ "{:,.2f}".format(log_food.gr) }}</td>
 										<td>{{ "{:,.2f}".format(log_food.cal) }}</td>
 										<td>
-											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-danger btn-xs pull-right">
-												<i class="glyphicon glyphicon-trash"></i> წაშლა
-											</a> 
+											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-danger btn-xs pull-right">წაშლა</a> 
 										</td>
 									</tr>
 									{% endfor %}
@@ -127,7 +125,7 @@
 						</div>
 
 						<div class="panel-body">
-								<a href="{{ url_for('home_bp.calendar') }}" class="btn btn-success btn-lg pull-right">დამახსოვრება</a> 
+								<a href="{{ url_for('home_bp.calendar') }}" class="btn btn-success btn-lg pull-right">შენახვა</a> 
 						</div>
 
 					</div>
