@@ -1,6 +1,6 @@
 """Sign-up & log-in forms."""
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, BooleanField
 from wtforms.validators import (
     DataRequired,
     Email,
@@ -18,6 +18,7 @@ class SignupForm(FlaskForm):
     phone = StringField('Phone', validators=[DataRequired(), Length(min=9, message='შეიყვანეთ ნომერი.')])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6, message='შეიყვანეთ ძლიერი პაროლი.')])
     confirm = PasswordField('Confirm Your Password', validators=[DataRequired(), EqualTo('password', message='პაროლი არ ემთხვევა.')])
+    checkbox = BooleanField('ვეთანხმები', validators=[DataRequired()])
     submit = SubmitField('რეგისტრაცია')
 
 
