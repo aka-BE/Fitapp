@@ -41,7 +41,8 @@ body {
 	margin-top: 20px;
 }
 .f25 {
-	font-size: 25px;
+	font-size: 22px;
+	color: rgb(15, 27, 184);
 }
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, 

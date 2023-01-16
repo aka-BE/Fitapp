@@ -161,6 +161,18 @@ def view(log_id):
         )
 
 
+@home_bp.route('/remove_log/<int:log_id>')
+@login_required
+def remove_log(log_id):
+
+    log = Log.query.get(log_id)
+
+    db.session.delete(log)
+    db.session.commit()
+
+    return redirect(url_for('home_bp.calendar'))
+
+
 @home_bp.route('/add_food_to_log/<int:log_id>', methods=['POST'])
 @login_required
 def add_food_to_log(log_id):

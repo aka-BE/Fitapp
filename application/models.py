@@ -64,7 +64,7 @@ class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('usr.id'))
-    prods = db.relationship('Prod', secondary=log_food, backref="logs")
+    prods = db.relationship('Prod', secondary=log_food, backref="logs", cascade='delete')
 
     def __repr__(self):
         return '<Log {}>'.format(self.date)

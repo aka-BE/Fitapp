@@ -41,15 +41,6 @@
 					<h1>
 						<a href="{{ url_for('home_bp.home') }}">FITAPP</a>
 					</h1>
-					<div class="row t20">
-						<div class="col-lg-4 col-lg-offset-4">
-							<ul class="nav nav-pills nav-justified">
-							  <li role="presentation">
-							  	<a href="{{ url_for('home_bp.calendar') }}" title="Calendar">კალენდარი</a>
-							  </li>
-							</ul>
-						</div>
-					</div>
 				</div>
 			</div>
 
@@ -91,12 +82,15 @@
 						<div class="panel-body">
 							<h3 class="lean-h text-black">
 								<i class="glyphicon glyphicon-calendar"></i> {{ log.date.strftime('%b %d, %Y') }}
+								<a href="{{ url_for('home_bp.remove_log', log_id=log.id) }}" class="btn btn-danger pull-right">
+									<i class="glyphicon glyphicon-trash"></i> წაშლა
+								</a> 
 							</h3>	
 
 							<div class="row">
 								<div class="col-lg-3">
 									<h4 class="lean-h">
-										კალორიების ჯამი: <strong class="f25">{{ total['cal'] }}</strong>
+										კალორიების ჯამი: <strong class="f25">{{ "{:,.2f}".format(total['cal']) }}</strong>
 									</h4>
 								</div>
 							</div>
@@ -118,10 +112,10 @@
 									<tr>
 										<td>{{ loop.index }}</td>
 										<td>{{ log_food.name }}</td>
-										<td>{{ log_food.gr }}</td>
-										<td>{{ log_food.cal }}</td>
+										<td>{{ "{:,.2f}".format(log_food.gr) }}</td>
+										<td>{{ "{:,.2f}".format(log_food.cal) }}</td>
 										<td>
-											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-success btn-xs">
+											<a href="{{ url_for('home_bp.remove_food_from_log', log_id=log.id, prod_id=log_food.id) }}" class="btn btn-danger btn-xs pull-right">
 												<i class="glyphicon glyphicon-trash"></i> წაშლა
 											</a> 
 										</td>
@@ -131,6 +125,11 @@
 
 							</table>
 						</div>
+
+						<div class="panel-body">
+								<a href="{{ url_for('home_bp.calendar') }}" class="btn btn-success btn-lg pull-right">დამახსოვრება</a> 
+						</div>
+
 					</div>
 				</div>
 			</div>
