@@ -78,10 +78,10 @@ def calendar():
 
     log_dates = [] # Create list
 
-    for log in logs: # Loop over every log date
-        cal = 0 # Define total calories as 0
-        for prod in log.prods: # Loop over every product in log
-            cal += prod.cal # Add together calories for looped product per log
+    for log in logs:            # Loop over every log date
+        cal = 0                 # Define total calories as 0
+        for prod in log.prods:  # Loop over every product in log
+            cal += prod.cal     # Add together calories for looped product per log
 
         # Create dictionary and add values of the current log and the total accumulated cal respectively
         log_dates.append({
@@ -164,33 +164,48 @@ def view(log_id):
 @home_bp.route('/remove_log/<int:log_id>')
 @login_required
 def remove_log(log_id):
+    """
+    GET requests to remove log.
+    """
 
-    log = Log.query.get(log_id)
+    user = current_user
+    log = Log.query.get_or_404(log_id)
 
-    db.session.delete(log)
-    db.session.commit()
+    # Checks if the user trying to access the log is the owner of the log
+    if user.id != log.user_id:
+        return redirect(url_for('home_bp.calendar'))
+    # If user is owenr of the log, delete the log.
+    else:    
+        db.session.delete(log)
+        db.session.commit()
 
-    return redirect(url_for('home_bp.calendar'))
+        return redirect(url_for('home_bp.calendar'))
 
 
 @home_bp.route('/add_food_to_log/<int:log_id>', methods=['POST'])
 @login_required
 def add_food_to_log(log_id):
+    """
+    
+    POST request to add food to log. 
+    """
 
-    log = Log.query.get_or_404(log_id)
+    log = Log.query.get_or_404(log_id)  # retrieve log by id, return 404 error if not found
 
     form = SearchForm()
-    food_name = form.food.data
-    food = Food.query.filter_by(name=food_name).first()
+    food_name = form.food.data                          # get the food name from the form data
+    food = Food.query.filter_by(name=food_name).first() # retrieve the food from the database by name
 
-    gr = form.gr.data
+    gr = form.gr.data # get the weight of the food in grams from the form data
 
-    cal = gr * food.cal
+    cal = gr * food.cal # calculate the number of calories in the food based on the weight
 
+    # create a new Prod object with the food name, calories, and weight
     prod = Prod(name=food.name, cal=cal, gr=gr)
     db.session.add(prod)
     db.session.commit()
 
+    # add the new food to the log_food table, linking the log and prod 
     add_food = log_food.insert().values(
         log_id=log.id,
         prod_id=prod.id
@@ -204,14 +219,26 @@ def add_food_to_log(log_id):
 @home_bp.route('/remove_food_from_log/<int:log_id>/<int:prod_id>')
 @login_required
 def remove_food_from_log(log_id, prod_id):
+    """
+    
+    GET request to remove food from log. 
+    """
 
-    log = Log.query.get(log_id)
-    prod = Prod.query.get(prod_id)
+    user = current_user
+    log = Log.query.get_or_404(log_id)
 
-    log.prods.remove(prod)
-    db.session.commit()
+    # Checks if the user trying to access the log is the owner of the log
+    if user.id != log.user_id:
+        return redirect(url_for('home_bp.calendar'))
+    # If user is owenr of the log, delete the log.
+    else:
 
-    return redirect(url_for('home_bp.view', log_id=log_id))
+        prod = Prod.query.get(prod_id)
+
+        log.prods.remove(prod)
+        db.session.commit()
+
+        return redirect(url_for('home_bp.view', log_id=log_id))
 
 
 @home_bp.route('/food', methods=['GET'])

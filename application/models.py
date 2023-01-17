@@ -68,6 +68,7 @@ class Log(db.Model):
 
     def __repr__(self):
         return '<Log {}>'.format(self.date)
+        
 
 class Prod(db.Model):
     """User Product log model."""
